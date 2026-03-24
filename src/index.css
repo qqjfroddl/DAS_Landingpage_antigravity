@@ -59,6 +59,23 @@
   --radius-full: 0.75rem;
 }
 
+:root:not(.dark) {
+  --color-primary: #2b4f8c;
+  --color-surface: #f8f9fa;
+  --color-background: #f8f9fa;
+  --color-on-surface: #111319;
+  --color-surface-container: #ffffff;
+  --color-surface-container-high: #f1f3f5;
+  --color-surface-container-low: #ffffff;
+  --color-surface-container-highest: #e9ecef;
+  --color-surface-container-lowest: #ffffff;
+  --color-secondary: #495057;
+  --color-tertiary: #008ba3;
+  --color-on-surface-variant: #343a40;
+  --color-outline: #adb5bd;
+  --color-outline-variant: #dee2e6;
+}
+
 @layer base {
   body {
     @apply bg-background text-on-surface font-body;
@@ -89,7 +106,12 @@
     -webkit-text-fill-color: transparent;
   }
 
-  input[type="date"] {
+  /* Light Theme / Dark Theme specific overrides */
+  .dark input[type="date"] {
     color-scheme: dark;
+  }
+
+  :root:not(.dark) input[type="date"] {
+    color-scheme: light;
   }
 }
