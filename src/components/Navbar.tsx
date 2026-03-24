@@ -56,11 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ onThemeToggle }) => {
             <circle cx="50" cy="50" r="16" stroke="currentColor" strokeWidth="7" fill="transparent"/>
           </svg>
           <div className="text-[34px] font-black tracking-tighter flex items-center h-full relative" style={{ fontFamily: 'Arial, Helvetica, sans-serif', letterSpacing: '-0.06em' }}>
-            <span className="relative inline-block mr-[1px]">
-              D
-              {/* D 안쪽의 붉은 사각형 포인트 */}
-              <span className="absolute top-[35%] left-[26%] w-[27%] h-[30%] bg-[#cc2229] inline-block z-[-1] rounded-sm"></span>
-            </span>
+            <span className="relative inline-block mr-[1px]">D</span>
             <span>A</span>
             <span>S</span>
           </div>
