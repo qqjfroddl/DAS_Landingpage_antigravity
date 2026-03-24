@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const VisitForm: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: GAS Web App Integration
-    alert('방문 신청이 접수되었습니다. (데모 모드)');
+    setIsSubmitting(true);
+
+    const gasUrl = import.meta.env.VITE_GAS_WEBAPP_URL;
+
+    if (!gasUrl) {
+      alert('접수 서버(GAS URL)가 설정되지 않았습니다. 관리자에게 문의하세요.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+
+      await fetch(gasUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      alert('방문 신청이 성공적으로 접수되었습니다. 신청자와 담당자 메일로 안내가 발송됩니다.');
+      e.currentTarget.reset();
+    } catch (error) {
+      console.error('Submit error:', error);
+      alert('방문 신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -28,19 +59,35 @@ const VisitForm: React.FC = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-1">
               <label className="font-label text-xs text-secondary uppercase">Full Name</label>
-              <input className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="성함을 입력하세요" type="text" required />
+              <input name="name" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="성함을 입력하세요" type="text" required />
             </div>
             <div className="space-y-1">
               <label className="font-label text-xs text-secondary uppercase">Email Address</label>
-              <input className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="example@das.com" type="email" required />
+              <input name="email" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="example@das.com" type="email" required />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label text-xs text-secondary uppercase">Company / Organization</label>
+              <input name="organization" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="소속을 입력하세요" type="text" required />
             </div>
             <div className="space-y-1">
               <label className="font-label text-xs text-secondary uppercase">Preferred Date</label>
-              <input className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" type="date" required />
+              <input name="date" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" type="date" required />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label text-xs text-secondary uppercase">Department of Interest</label>
+              <input name="department" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface" placeholder="관심 부서 (예: R&D, 영업 등)" type="text" required />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label text-xs text-secondary uppercase">Additional Questions</label>
+              <textarea name="question" className="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-tertiary focus:ring-0 transition-all p-3 text-sm text-on-surface h-24 resize-none" placeholder="질문 사항을 남겨주세요"></textarea>
             </div>
             <div className="pt-4">
-              <button className="w-full py-4 bg-primary text-surface font-headline font-black uppercase tracking-widest hover:brightness-110 transition-all" type="submit">
-                신청하기
+              <button 
+                className="w-full py-4 bg-primary text-surface font-headline font-black uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50" 
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? '신청 중...' : '신청하기'}
               </button>
             </div>
           </form>

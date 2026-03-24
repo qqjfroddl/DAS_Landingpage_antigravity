@@ -88,4 +88,8 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  input[type="date"] {
+    color-scheme: dark;
+  }
 }
