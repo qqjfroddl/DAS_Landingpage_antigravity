@@ -22,11 +22,19 @@ function App() {
     <div className={`min-h-screen bg-background text-on-surface transition-colors duration-500 ${isDark ? 'dark' : ''}`}>
       <Navbar onThemeToggle={() => setIsDark(!isDark)} />
       <main className="pt-24 overflow-x-hidden">
-        <Hero />
+        <section id="hero">
+          <Hero />
+        </section>
         <Stats />
-        <BentoGrid />
-        <Recruitment />
-        <VisitForm />
+        <section id="technology">
+          <BentoGrid />
+        </section>
+        <section id="recruitment">
+          <Recruitment />
+        </section>
+        <section id="visit">
+          <VisitForm />
+        </section>
       </main>
       <Footer />
     </div>

@@ -31,9 +31,14 @@ const Recruitment: React.FC = () => {
               <p className="text-secondary font-body text-sm">다스의 일원이 된 것을 환영합니다! 입사 안내가 진행됩니다.</p>
             </div>
           </div>
-          <button className="mt-16 px-8 py-4 border border-primary text-primary font-headline font-bold hover:bg-primary/5 transition-colors">
+          <a
+            href="https://i-das.recruiter.co.kr/career/home?new"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-16 inline-block px-8 py-4 border border-primary text-primary font-headline font-bold hover:bg-primary/5 transition-colors"
+          >
             채용 공고 바로가기
-          </button>
+          </a>
         </div>
         <AiChatbot />
       </div>

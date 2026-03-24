@@ -16,10 +16,15 @@ const BentoGrid: React.FC = () => {
               <h3 className="text-3xl font-headline font-bold mb-4">Smart Seat AI</h3>
               <p className="text-secondary font-body max-w-sm">탑승자의 체형과 상태를 실시간으로 분석하여 최적의 안락함과 안전을 자동으로 조절하는 AI 시트 시스템.</p>
             </div>
-            <div className="flex items-center text-primary group-hover:gap-4 transition-all">
+            <a
+              href="http://www.i-das.com/page/products.php"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-primary group-hover:gap-4 transition-all"
+            >
               <span className="font-headline font-bold">더 알아보기</span>
               <span className="material-symbols-outlined ml-2">arrow_forward</span>
-            </div>
+            </a>
           </div>
           <img 
             className="absolute right-0 bottom-0 w-3/4 opacity-20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-700" 
