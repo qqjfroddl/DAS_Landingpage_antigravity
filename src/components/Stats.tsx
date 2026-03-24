@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 const CountUp = ({ value, suffix = "" }: { value: number, suffix?: string }) => {
