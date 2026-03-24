@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #b1c7f2;
+  --color-surface: #111319;
+  --color-on-secondary: #2d3135;
+  --color-on-error-container: #ffdad6;
+  --color-inverse-on-surface: #2e3036;
+  --color-surface-container-low: #191c21;
+  --color-primary-container: #001b3d;
+  --color-tertiary-fixed: #9cf0ff;
+  --color-on-surface-variant: #c4c6cf;
+  --color-tertiary-container: #001f24;
+  --color-secondary: #c4c6cc;
+  --color-surface-bright: #36393f;
+  --color-on-tertiary-fixed: #001f24;
+  --color-on-tertiary: #00363d;
+  --color-surface-container: #1d2025;
+  --color-outline-variant: #44474e;
+  --color-on-background: #e1e2e9;
+  --color-on-primary-fixed-variant: #31476b;
+  --color-outline: #8e9099;
+  --color-surface-tint: #b1c7f2;
+  --color-error: #ffb4ab;
+  --color-on-tertiary-container: #0091a2;
+  --color-surface-variant: #32353a;
+  --color-primary-fixed-dim: #b1c7f2;
+  --color-on-error: #690005;
+  --color-surface-dim: #111319;
+  --color-primary-fixed: #d6e3ff;
+  --color-secondary-fixed: #e0e2e8;
+  --color-on-primary-fixed: #001b3d;
+  --color-on-surface: #e1e2e9;
+  --color-on-secondary-container: #b6b8be;
+  --color-tertiary: #00daf3;
+  --color-secondary-container: #46494e;
+  --color-secondary-fixed-dim: #c4c6cc;
+  --color-error-container: #93000a;
+  --color-background: #111319;
+  --color-on-primary: #193053;
+  --color-surface-container-highest: #32353a;
+  --color-on-primary-container: #6f84ac;
+  --color-surface-container-high: #272a30;
+  --color-on-secondary-fixed-variant: #44474b;
+  --color-tertiary-fixed-dim: #00daf3;
+  --color-on-tertiary-fixed-variant: #004f58;
+  --color-inverse-primary: #495f84;
+  --color-inverse-surface: #e1e2e9;
+  --color-surface-container-lowest: #0b0e13;
+  --color-on-secondary-fixed: #181c20;
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(17, 19, 25, 0.8);
+    backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(196, 198, 204, 0.15);
+  }
+
+  .bento-card {
+    background-color: theme(--color-surface-container);
+    transition: all 0.3s ease;
+  }
+
+  .bento-card:hover {
+    background-color: theme(--color-surface-container-high);
+    transform: translateY(-4px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, theme(--color-primary) 0%, theme(--color-tertiary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
