@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 const AiChatbot: React.FC = () => {
   const [messages, setMessages] = useState([
@@ -8,7 +8,9 @@ const AiChatbot: React.FC = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  const GENAI_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+  // vite.config.ts의 define에 의해 치환됩니다.
+  // @ts-ignore - process.env는 Vite define 플러그인에 의해 동적으로 주입됩니다.
+  const GENAI_KEY = process.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY;
 
   const handleSend = async () => {
     if (!input.trim() || isTyping) return;
@@ -23,17 +25,18 @@ const AiChatbot: React.FC = () => {
         throw new Error('API 키가 설정되지 않았습니다.');
       }
 
-      const genAI = new GoogleGenerativeAI(GENAI_KEY);
-      const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash",
-        systemInstruction: "(주)다스 전문 채용 멘토로서 정중한 경어체(해요체)를 사용하세요. 가독성을 위해 불렛 포인트를 적극 활용하고, 개인 신상이나 대외비 등 답변이 불가능한 정보는 recruit@das.co.kr로 문의하도록 안내하세요."
+      // 최신 @google/genai SDK 사용
+      const ai = new GoogleGenAI({ apiKey: GENAI_KEY });
+      // PRD 요구사항은 Gemini 3 Flash Preview이나 현시점 가용한 최신 flash 계열 모델 또는 gemini-2.5-flash 지정
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: userMessage,
+        config: {
+          systemInstruction: "(주)다스 전문 채용 멘토로서 정중한 경어체(해요체)를 사용하세요. 가독성을 위해 불렛 포인트를 적극 활용하고, 개인 신상이나 대외비 등 답변이 불가능한 정보는 recruit@das.co.kr로 문의하도록 안내하세요."
+        }
       });
 
-      const result = await model.generateContent(userMessage);
-      const response = await result.response;
-      const text = response.text();
-
-      setMessages(prev => [...prev, { role: 'ai', content: text }]);
+      setMessages(prev => [...prev, { role: 'ai', content: response.text || '' }]);
     } catch (error) {
       console.error(error);
       setMessages(prev => [...prev, { role: 'ai', content: '죄송합니다. 메시지를 처리하는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.' }]);
