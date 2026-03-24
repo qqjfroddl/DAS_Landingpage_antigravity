@@ -6,6 +6,7 @@ import BentoGrid from './components/BentoGrid';
 import Recruitment from './components/Recruitment';
 import VisitForm from './components/VisitForm';
 import Footer from './components/Footer';
+import CompanyInfo from './components/CompanyInfo';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -26,6 +27,7 @@ function App() {
           <Hero />
         </section>
         <Stats />
+        <CompanyInfo />
         <section id="technology">
           <BentoGrid />
         </section>

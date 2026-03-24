@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface NavbarProps {
   onThemeToggle: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onThemeToggle }) => {
+  const [activeSection, setActiveSection] = useState('hero');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'technology', 'recruitment', 'visit'];
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      for (const section of [...sections].reverse()) {
+        const element = document.getElementById(section);
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveSection(section);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setActiveSection(id);
+  };
+
+  const getMenuClass = (id: string) => {
+    return activeSection === id
+      ? "text-tertiary border-b-2 border-tertiary pb-1 transition-colors"
+      : "text-secondary hover:text-primary transition-colors pb-1 border-b-2 border-transparent";
   };
 
   return (
@@ -15,10 +42,10 @@ const Navbar: React.FC<NavbarProps> = ({ onThemeToggle }) => {
       <div className="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
         <div className="text-2xl font-black text-primary tracking-tighter font-headline">DAS</div>
         <div className="hidden md:flex space-x-12 font-headline font-bold tracking-tight">
-          <a className="text-tertiary border-b-2 border-tertiary pb-1" href="#hero">Company</a>
-          <button className="text-secondary hover:text-primary transition-colors" onClick={() => scrollToSection('technology')}>Technology</button>
-          <button className="text-secondary hover:text-primary transition-colors" onClick={() => scrollToSection('recruitment')}>Career</button>
-          <button className="text-secondary hover:text-primary transition-colors" onClick={() => scrollToSection('visit')}>Sustainability</button>
+          <button className={getMenuClass('hero')} onClick={() => scrollToSection('hero')}>Company</button>
+          <button className={getMenuClass('technology')} onClick={() => scrollToSection('technology')}>Technology</button>
+          <button className={getMenuClass('recruitment')} onClick={() => scrollToSection('recruitment')}>Career</button>
+          <button className={getMenuClass('visit')} onClick={() => scrollToSection('visit')}>Visit</button>
         </div>
         <div className="flex items-center space-x-4">
           <button 

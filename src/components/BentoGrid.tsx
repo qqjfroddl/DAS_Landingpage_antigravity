@@ -33,31 +33,40 @@ const BentoGrid: React.FC = () => {
           />
         </div>
         {/* Medium Card 1 */}
-        <div className="md:col-span-3 bento-card p-10 rounded-xl flex flex-col justify-between group">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-2xl font-headline font-bold mb-2">Zero-Gravity Mode</h3>
-              <p className="text-secondary font-body text-sm">자율주행 시 최고의 휴식을 제공하는 무중력 시트 메커니즘.</p>
+        <div className="md:col-span-3 bento-card rounded-xl relative overflow-hidden group">
+          <img src="/zero_gravity_seat.png" alt="Zero Gravity Seat" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700" />
+          <div className="relative z-10 p-10 h-full flex flex-col justify-between bg-gradient-to-t from-surface-container/80 to-transparent">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-2xl font-headline font-bold mb-2 drop-shadow-md">Zero-Gravity Mode</h3>
+                <p className="text-secondary font-body text-sm max-w-[80%] drop-shadow-md">자율주행 시 최고의 휴식을 제공하는 무중력 시트 메커니즘.</p>
+              </div>
+              <span className="material-symbols-outlined text-tertiary text-4xl drop-shadow-[0_0_10px_rgba(0,218,243,0.5)]">airline_seat_recline_extra</span>
             </div>
-            <span className="material-symbols-outlined text-tertiary text-4xl">airline_seat_recline_extra</span>
-          </div>
-          <div className="mt-8 bg-surface-container-high h-2 w-full rounded-full overflow-hidden">
-            <div className="bg-tertiary h-full w-3/4"></div>
+            <div className="mt-8 bg-surface-container-high/50 backdrop-blur-sm h-2 w-full rounded-full overflow-hidden">
+              <div className="bg-tertiary h-full w-3/4 shadow-[0_0_10px_rgba(0,218,243,0.8)]"></div>
+            </div>
           </div>
         </div>
         {/* Small Card 1 */}
-        <div className="md:col-span-1 bento-card p-8 rounded-xl flex flex-col items-center justify-center text-center group">
-          <span className="material-symbols-outlined text-primary text-4xl mb-4">eco</span>
-          <h4 className="font-headline font-bold">Eco-Materials</h4>
+        <div className="md:col-span-1 bento-card rounded-xl relative overflow-hidden group">
+          <img src="/eco_material.png" alt="Eco Materials" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700" />
+          <div className="relative z-10 p-8 h-full flex flex-col items-center justify-center text-center bg-gradient-to-b from-transparent to-surface-container/90">
+            <span className="material-symbols-outlined text-primary text-4xl mb-4 drop-shadow-[0_0_8px_rgba(177,199,242,0.8)]">eco</span>
+            <h4 className="font-headline font-bold drop-shadow-md">Eco-Materials</h4>
+          </div>
         </div>
         {/* Small Card 2 */}
-        <div className="md:col-span-2 bento-card p-8 rounded-xl flex items-center gap-6 group">
-          <div className="bg-primary/10 p-4 rounded">
-            <span className="material-symbols-outlined text-primary">biotech</span>
-          </div>
-          <div>
-            <h4 className="font-headline font-bold">Global R&D</h4>
-            <p className="text-xs text-secondary font-body">최첨단 시뮬레이션 연구소</p>
+        <div className="md:col-span-2 bento-card rounded-xl relative overflow-hidden group">
+          <img src="/global_rnd.png" alt="Global R&D" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700" />
+          <div className="relative z-10 p-8 h-full flex items-center gap-6 bg-gradient-to-r from-surface-container/90 to-transparent">
+            <div className="bg-primary/20 backdrop-blur-md p-4 rounded border border-primary/10 shadow-[0_0_15px_rgba(177,199,242,0.15)] group-hover:shadow-[0_0_20px_rgba(177,199,242,0.3)] transition-all">
+              <span className="material-symbols-outlined text-primary">biotech</span>
+            </div>
+            <div>
+              <h4 className="font-headline font-bold drop-shadow-md text-lg">Global R&D</h4>
+              <p className="text-sm text-secondary font-body mt-1 drop-shadow-sm">최첨단 시뮬레이션 연구소</p>
+            </div>
           </div>
         </div>
       </div>
